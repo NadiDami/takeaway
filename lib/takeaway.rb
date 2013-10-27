@@ -2,14 +2,16 @@ require 'twilio-ruby'
 
 class Takeaway
 
-#Twilio details
+#Twilio details......................................
+
   ACCOUNT_SID = "AC8400347f29cf44f58d5339e8a23b1d2b"
   AUTH_TOKEN = "82250c8827bf9ea16a07dcac25618ccb"
   FROM_NUMBER = "+44 1270 261004"
 
+#....................................................
+
   def initialize menu={}
     @menu = menu
-    
   end
 
   def twilio_client
@@ -18,6 +20,7 @@ class Takeaway
 
   def add_dish_to_menu dish_name, price
     @menu[dish_name] = price
+    "#{dish_name} has been added to the menu at a price of #{price}"
   end
 
   def print_menu
@@ -28,10 +31,8 @@ class Takeaway
       twilio_client.account.messages.create(
       :from => FROM_NUMBER,
       :to => customer.mobile_number,
-      :body => message
-    )
+      :body => message)
      "Your confirmation message has been sent to #{customer.name}."
-
   end
 
   def order_total dishes={}
@@ -40,8 +41,7 @@ class Takeaway
        total
     end
   end
-      
-  
+
   def message
     "Thank you! Your order was placed and will be delivered before #{one_hour_from_now}"
   end
@@ -54,7 +54,5 @@ class Takeaway
     raise "I'm sorry. Your order could not be processed since the calcualated total is incorrect." if customer_total != order_total(dishes)
     send_confirmation_message_to customer
   end
-
-
 
 end

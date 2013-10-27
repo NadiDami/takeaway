@@ -10,7 +10,6 @@ describe Takeaway do
 
   context 'with the restaurant\'s menu' do
 
-
     it 'can add one dish with its price to the menu' do
       takeaway.add_dish_to_menu('jollof rice', 8)
       expect(takeaway.print_menu).to eq({'jollof rice' => 8})
@@ -68,8 +67,6 @@ describe Takeaway do
     it 'includes in the confirmation message a delivery time of up to one hour' do
       expect(takeaway.message).to include takeaway.one_hour_from_now
     end
-
-   
 
   end
 
